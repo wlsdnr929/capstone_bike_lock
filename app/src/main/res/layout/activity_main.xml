@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="매트릭스"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:fontFamily="sans-serif-medium"
+            tools:layout_editor_absoluteX="165dp"
+            tools:layout_editor_absoluteY="13dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/LL1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="connection state : "/>
+
+            android:text="연결 정보 : "/>
 
         <TextView
             android:id="@+id/connection_status_textview"
@@ -25,30 +58,44 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:weightSum="1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<!--    <LinearLayout-->
+<!--        android:weightSum="1"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
-        <EditText
-            android:id="@+id/input_string_edittext"
-            android:hint="input text here"
-            android:layout_weight="0.8"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/input_string_edittext"-->
+<!--            android:hint="input text here"-->
+<!--            android:layout_weight="0.8"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"/>-->
 
-        <Button
-            android:id="@+id/send_button"
-            android:layout_weight="0.2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Send" />
-    </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/send_button"-->
+<!--            android:layout_weight="0.2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Send" />-->
+<!--    </LinearLayout>-->
 
-    <ListView
+
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/LL1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="80dp"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/message_listview"/>
+        android:text="Button"
+        android:src="@drawable/lock"/>
 
-</LinearLayout>
+
+<!--    <ListView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/message_listview"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
