@@ -1,17 +1,22 @@
 package com.example.wifiwithkotlin
 
+import android.app.PendingIntent.getActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import com.example.wifiwithkotlin.R
 import com.example.wifiwithkotlin.databinding.ActivityMainBinding
 import java.io.*
 import java.net.Socket
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.security.AccessController.getContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,13 +33,26 @@ class MainActivity : AppCompatActivity() {
     private var mOut: PrintWriter? = null
     private var mIn: BufferedReader? = null
     private var mReceiverThread: Thread? = null
-    var flagLock:Boolean = false // 0: 잠김, 1: 열림
+    var isLock:Boolean = true // 1: 잠김, 0: 열림
+    var flag:Boolean =false;
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mConnectionStatus = findViewById<View>(R.id.connection_status_textview) as TextView
+
+//        binding.btnCheckSafety.setOnClickListener{
+//            if(flag){
+//                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.black))
+//                //binding.btnCheckSafety.setBackgroundColor(Color.parseColor("#ff3030"))
+//                flag = false;
+//            }else{
+//                binding.btnCheckSafety.setBackgroundColor(Color.parseColor("#ff3030"))
+//                flag=true;
+//            }
+//        }
+
         //mInputEditText = findViewById<View>(R.id.input_string_edittext) as EditText
         TAG = "TcpClient"
         //val mMessageListview = findViewById<View>(R.id.message_listview) as ListView
@@ -57,21 +75,22 @@ class MainActivity : AppCompatActivity() {
         // 집
         Thread(ConnectThread("192.168.0.17", 8090)).start()
         // 학교
-         //Thread(ConnectThread("192.168.0.55", 8090)).start()
-
-        binding.button.setOnClickListener {
-            if(flagLock){
-                binding.button.setImageResource(R.drawable.lock)
-                flagLock=false
+        //Thread(ConnectThread("192.168.0.62", 8090)).start()
+        // 원찬 핫스팟
+        //Thread(ConnectThread("192.168.215.192", 8090)).start()
+        binding.imageButton.setOnClickListener {
+            if(isLock){
+                binding.imageButton.setImageResource(R.drawable.unlock)
+                isLock=false
             }
             else{
-                binding.button.setImageResource(R.drawable.unlock)
-                flagLock = true
+                binding.imageButton.setImageResource(R.drawable.lock)
+                isLock = true
             }
-            var sendMessage = ""
-            if(flagLock == true) sendMessage = "1"
-            else sendMessage = "0"
-            Thread(SenderThread(sendMessage)).start()
+//            var sendMessage = "5"
+//            if(isLock == true) sendMessage = "1"
+//            else sendMessage = "0"
+            Thread(SenderThread("5")).start()
         }
     }
 
@@ -172,6 +191,18 @@ class MainActivity : AppCompatActivity() {
                         runOnUiThread {
 
                             Log.e(TAG,"recv message: $recvMessage")
+                            // 자물쇠 털림
+                            if(recvMessage == "4"){
+                                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.red))
+                                //binding.btnCheckSafety.setBackgroundColor(ContextCompat.getColor(context,R.color.red)
+                                binding.btnCheckSafety.setText("털림")
+                            }
+                            // 자물쇠 붙어있음
+                            else if(recvMessage=="7"){
+                                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.green))
+                                binding.btnCheckSafety.setText("잘 잠겨있음")
+                            }
+
                             // mConversationArrayAdapter!!.insert("$mServerIP - $recvMessage", 0)
 
                             //mConversationArrayAdapter!!.insert("<조이름: 매트릭스> 아두이노에서 받은 거:(바로 윗줄)", 0)

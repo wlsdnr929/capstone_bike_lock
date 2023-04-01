@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -85,12 +85,24 @@
         app:layout_constraintTop_toBottomOf="@id/LL1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="80dp"
-        android:id="@+id/button"
+        android:layout_marginTop="60dp"
+        android:id="@+id/image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
         android:src="@drawable/lock"/>
+
+    <Button
+        android:id="@+id/btnCheckSafety"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="잘 잠겨있음"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:layout_constraintTop_toBottomOf="@id/image_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 
 <!--    <ListView-->
