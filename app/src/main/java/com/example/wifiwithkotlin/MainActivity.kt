@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         )
         //mMessageListview.adapter = mConversationArrayAdapter
         // 집
-        Thread(ConnectThread("192.168.0.17", 8090)).start()
+        //Thread(ConnectThread("192.168.0.17", 8090)).start()
         // 학교
-        //Thread(ConnectThread("192.168.0.62", 8090)).start()
+        //Thread(ConnectThread("192.168.0.54", 8090)).start()
         // 원찬 핫스팟
-        //Thread(ConnectThread("192.168.215.192", 8090)).start()
+        Thread(ConnectThread("192.168.215.192", 8090)).start()
         binding.imageButton.setOnClickListener {
             if(isLock){
                 binding.imageButton.setImageResource(R.drawable.unlock)

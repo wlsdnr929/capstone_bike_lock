@@ -104,6 +104,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <ImageView
+        android:layout_marginTop="80dp"
+        android:id="@+id/btnCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnCheckSafety"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/cctv"/>
+
+
 
 <!--    <ListView-->
 <!--        android:layout_width="wrap_content"-->
