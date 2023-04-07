@@ -1,6 +1,7 @@
 package com.example.wifiwithkotlin
 
 import android.app.PendingIntent.getActivity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -91,6 +92,15 @@ class MainActivity : AppCompatActivity() {
 //            if(isLock == true) sendMessage = "1"
 //            else sendMessage = "0"
             Thread(SenderThread("5")).start()
+        }
+
+//        binding.btnCctv.setOnClickListener {
+//            var intent = Intent(this,CCTVActivity::class.java)
+//            startActivity(intent)
+//        }
+        binding.btnCctv.setOnClickListener {
+            var intent =Intent(this,CCTVActivity::class.java)
+            startActivity(intent)
         }
     }
 
